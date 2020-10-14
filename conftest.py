@@ -22,6 +22,7 @@ def load_config(file):
 def config(request):
     return load_config(request.config.getoption('--target'))
 
+
 def install_server_congiguration(host, username, password):
     with ftputil.FTPHost(host, username, password) as remote:
         if remote.path.isfile("config_inc.php.bak"):
@@ -46,11 +47,11 @@ def configure_server(request, config):
     request.addfinalizer(fin)
 
 @pytest.fixture
-def app(request):
+def app(request, config):
     global fixture
     browser = request.config.getoption('--browser')
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=config["web"]['baseUrl'])
+        fixture = Application(browser=browser, config=config)
     fixture.session.ensure_login(username=config["webadmin"]["username"],
                                  password=config["webadmin"]["password"])
     return fixture
