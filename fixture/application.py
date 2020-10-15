@@ -3,6 +3,8 @@ from selenium import webdriver
 from fixture.james import JamesHelper
 from fixture.session import SessionHelper
 from fixture.project import ProjectHelper
+from fixture.signup import SignupHelper
+from fixture.mail import Mailhelper
 
 
 
@@ -22,6 +24,8 @@ class Application:
         self.config = config
         self.base_url = config['web']['baseUrl']
         self.james = JamesHelper(self)
+        self.signup = SignupHelper(self)
+        self.mail = Mailhelper(self)
 
     def open_home_page(self):
         wd = self.wd
