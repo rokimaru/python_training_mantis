@@ -3,7 +3,7 @@ import email
 import time
 
 
-class Mailhelper:
+class MailHelper:
 
     def __init__(self, app):
         self.app = app
